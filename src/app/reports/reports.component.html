@@ -1,0 +1,193 @@
+<!-- <html>
+  <head>
+    <!-- Resources -->
+<!-- <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+<script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" /> -->
+
+<!-- Chart code -->
+ 
+  <div class="container">
+    
+    <div class="row" style="margin-top: -11px;">
+      <div class="col-md-2">
+        <div class="form-group-addon">
+            <b>Startdate</b> 
+          <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          <input type="date" class="form-control"  id="Startdate" name="Startdate" placeholder="Startdate" style="height: 2.4em;width: 170px;" [(ngModel)]="start_date">
+        </div>
+      </div>
+      <div class="col-md-3">
+
+        <div class="form-group" style="margin-left: 21px;">
+          <b>End date</b>
+          <input type="date" class="form-control"[min]="start_date"  id="enddate" name="endtdate" style="height: 2.4em;width: 176px;" [(ngModel)]="end_date" >
+        </div>
+          <!-- <div class="form-group" style="margin-left: 24px;">
+            <b>Enddate</b>
+            <input type="date"  class="form-control" id="enddate" name="endtdate" style="height: 2.4em;width: 176px;" [(ngModel)]="end_date" (ngModelChange)="fetchrecord($event,start_date,end_date)">
+          </div> -->
+        </div>
+        <div class="col-md-2">
+          <select class="form-control" name="rooms" id=""  style="margin-left: -34px;margin-top: 24px;width: 181px;"  [(ngModel)]="rate_res"(ngModelChange)="onchangeobj(rate_res,start_date,end_date)">
+            <option>Number of Rooms</option>
+            <option>Nights</option>
+          </select>
+        </div>
+        <!-- <div class="col-md-2">
+            <button type="button" class="btn btn-success" style="width:100%;margin-top: 24px;height: 40px; margin-left: 4px;" (click)="GetallDetails(start_date,end_date)">Get Details</button> 
+          </div> -->
+        <div class="col-md-2">
+            <button  class="btn " style="width:100%;margin-top: 24px;height: 40px;margin-left: 4px;" (click)="exportChart()"> Download</button>
+            <!-- <button type="button" class="btn btn-success" style="width:100%;margin-top: 21px;height: 34px;" (click)="exportChart()">Download PDF</button> -->
+          </div>
+       </div> 
+     
+      
+      </div>
+      <div class="row" style="margin-top: 8px;">
+          <div class="col-md-6">
+            <!-- Countries -->
+              <div class="card" style="width: 525px; height: 303px;margin-left: -8px; ">
+                  <!-- <div><b style="margin-left: 10px;">Countries</b></div> -->
+                      <div id="chart8" style="width: 113%; height:230px;"></div>
+              </div>
+          </div>
+
+   
+
+     <div class="col-md-6">
+        <div class="card" style="width: 525px; height: 303px;margin-left: -8px; ">
+            <!-- <div><b style="margin-left: 10px;">Year Reservation</b></div> -->
+                <div id="chart1" style="width: 113%; height:230px;"></div>
+        </div>
+
+      
+    </div>
+  </div>
+  <div class="row" style="margin-top: 8px;">
+      <div class="col-md-6">
+          <div class="card" style="width: 525px; height: 303px;margin-left: -8px; ">
+              <!-- <div><b style="margin-left: 10px;">Language</b></div> -->
+                  <div id="chart6" style="width: 113%; height:230px;"></div>
+      </div> 
+      </div>
+    <!-- <div id="chartdiv2" style="width: 113%; height:230px;"></div> -->
+    <div class="col-md-6">
+        <div class="card" style="width: 525px; height: 303px;margin-left: -8px; ">
+            <!-- <div><b style="margin-left: 10px;">Booking vs Confirmation</b></div> -->
+                <div id="chart5" style="width: 113%; height:230px;"></div>
+    </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 8px;">
+      <div class="col-md-6">
+          <div class="card" style="width: 525px; height: 303px;margin-left: -8px; ">
+              <!-- <div><b style="margin-left: 10px;">Occupancy</b></div> -->
+                  <div id="chart4" style="width: 113%; height:230px;"></div>
+                  <!-- <div class="col-md-2">
+                    <button type="button" class="btn btn-danger"style="margin-left: 166px;"  (click) = "download()">DownloadPDF</button>
+                  </div> -->
+      </div>
+      </div>
+      <div class="col-md-6">
+          <div class="card" style="width: 525px; height: 303px;margin-left: -8px; ">
+              <!-- <div><b style="margin-left: 10px;">Booking vs Delivery</b></div> -->
+                  <div id="chart7" style="width: 113%; height:230px;"></div>
+      </div>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 8px;">
+      <div class="col-md-6">
+          <div class="card" style="width: 531px; height: 303px; margin-left: -13px;">
+              <!-- <div>
+                 <b style="margin-left: 10px;">Users</b> </div>
+               -->
+        <div id="chart2" style="width: 113%;height:230px;margin-left: -18px;"></div>
+        <!-- <div class="col-md-3"></div>
+        <div class="col-md-2">
+        <button type="button" class="btn btn-danger"style="margin-left: 166px;"  (click) = "DownloadPDF(start_date,end_date)">DownloadPDF</button>
+      </div> -->
+      </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card" style="width: 525px; height: 303px;margin-left: -8px; ">
+            <!-- <div><b style="margin-left: 10px;">Channels</b></div> -->
+      <div id="chart3" style="width: 113%;height:230px;margin-left: -18px;"></div>
+      <!-- <div class="col-md-3"></div>
+      <div class="col-md-2">
+      <button type="button" class="btn btn-danger"style="margin-left: 166px;"  (click) = "DownloadchannelPDF(start_date,end_date)">DownloadPDF</button>
+    </div> -->
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-top: 8px;">
+  <div class="col-md-12">
+  <div class="card">
+      <!-- <h4 style="text-align: center;">History Booking</h4> -->
+
+      <div id="chart9"  style="width:100%;height:450px;"></div>   
+
+  <!-- <table>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4"></div>
+      <div class="col-md-2"></div>
+      <div class="col-md-2">
+        <select name="romnm"  style="width:100px;margin-left: 168px;margin-top: 3px;" (change) ="selectdropdown(roomtype)"  [(ngModel)]="roomtype" >
+            <option selected="" value=""></option>  
+            <option  *ngFor="let roomtype of getyear" [ngValue]="roomtype.title">{{roomtype.title}}</option>
+           </select>
+          </div>
+          </div>
+           <tr >
+      <td style = "width: 700px;height: 50%;"><canvas id="chart9" style="width:827;height: 434px;"></canvas></td>
+      <td style = "width: 700px;height: 50%;"></td>
+    </tr>
+  
+  </table> -->
+</div>
+</div>
+</div>
+
+<div class="row" style="margin-top: 8px;">
+<div class="col-md-12">
+  <div class="card">
+        <!-- <h4 style="text-align: center;">Arrived Room Status(in Month)</h4> -->
+
+            <div id="chart10"  style="width:103%;height:450px;"></div>   
+      
+  </div>
+</div> 
+</div>
+
+<div class="row" style="margin-top: 8px;">
+  <div class="col-md-12">
+    <div class="card">
+          <h4 style="text-align: center;"></h4>
+  
+              <div id="chart11"  style="width:100%;height:500px;"></div>   
+        
+    </div>
+  </div> 
+  </div>
+  <!-- Resources -->
+
+<!-- Chart code -->
+  <!-- <script src="https://www.amcharts.com/lib/3/ammap.js"></script>
+<script src="https://www.amcharts.com/lib/3/maps/js/worldLow.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
+<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" /> -->
+  <div class="row" style="margin-top: 8px;">
+    <div class="col-md-12">
+      <div class="card">
+            <!-- <h4 style="text-align: center;">Covergence Report</h4> -->
+            
+  <div id="chart20" style="width:100%;height:500px;"></div>
+</div>
+</div> 
+</div>
+<!-- </html> -->

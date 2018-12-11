@@ -1,0 +1,120 @@
+
+<div class="row">
+        <!-- 
+            <div class="col-sm-12">
+              <h6 >Dashboard</h6>
+            </div> -->
+            </div>
+        <div class="row " style="margin-top: 0px;">
+            <!-- <div class="col-sm-3 carsstyle hovercss" style="padding-left: 40px;"
+            *ngFor="let roomcount of getroomdetails">
+                <div class="card "  [ngClass]="{'changeborderclr': basicFlag}">
+                    <div class="card-body" >
+                           <div class="row" style="margin-top: -18px;">
+                                <div class="col-sm-6" style="padding-top: 10px;margin-left: -10px;padding-left: 6px;">
+                                    <h2 style="font-size: 30px;font-weight:500;">{{roomcount.available_count}}/{{roomcount.booked_count}}</h2>
+                                    <h4 style="font-size: 39px;font-weight:700;">{{roomcount.booked_count}}</h4>
+                                </div>
+                                <div class="col-sm-6 " style="margin-left: -8px;">
+                                     
+                                    <i class="fa fa-hotel"></i>
+                                    </div>
+                           </div>
+                           <div class="row roomcss" style="margin-top: 5px;margin-bottom:5px;">
+                                        <label style="font-weight: 600;">{{roomcount.room_name|titlecase}}</label>
+                           </div>
+                    </div>
+                    <div class="card-footer" style="background-color: rgba(0,0,0,0.1) !important;
+                    margin-top: -30px;padding: 0px;">
+                        <label style="color: white;margin-left: 36px;">More Info &nbsp;
+                            <i class="fa fa-arrow-circle-right hovercss" ></i></label>
+                    </div>
+                  </div>
+            </div> -->
+            <div class="card mb-4 bg-dark text-white" *ngFor="let roomcount of getroomdetails" style="margin-left: 20px;">
+                <div class="parent"style="width:230px">   
+                <img class="card-img child" src="../../assets/images/1.jpg" alt="Card image" style="height: 150px;width: 240px;">
+                    <div class="card-img-overlay">
+                       <h5 class="card-title" style="font-weight:900;font-size:40px;">{{roomcount.available_count}}/{{roomcount.booked_count}}</h5>
+                       <p class="card-text" style="font-weight:900;font-size:20px;">{{roomcount.room_name|titlecase}}</p>
+                       <p class="card-text" style="font-weight:900;"></p>
+                    </div>
+                </div>
+                 </div>
+         </div>
+        
+            <div class="row" cardheadstyle style="margin-top: 5px;">
+        
+             <div class="col-sm-4">
+              <div class="card">
+                <div class="card-header" style="background-color: #337ab7;color:white;">
+                   <i class="fa fa-bell fa-fw"></i>Notifications </div>
+                <div class="card-body" style="height: 20em;max-height: 416px;overflow-y: auto;overflow-x: hidden;">
+                    <div class="eachitem">
+                        <div class="row card-header" *ngFor="let notify of notification" style="width: 315px;
+                        height: 100px;background-color: white;">
+                            <div class="card" style="width:100%">
+                                <div class="card-body" style="padding: 5px;background-color: antiquewhite;">
+                                    <div>
+                                        <h4 class="card-title" style="font-size:14px;font-weight:700;color:blue">Mobile : <span style="color:black">{{notify.customer_mobile}}</span></h4> 
+                                        <p class="card-text" style="font-size: 14px;margin-top:-10px;color:blue">Confirmation : <span style="color:black">{{notify.customer_confirmation_number}}</span></p><p class="text-right" style="font-size: 10px;margin-top:-20px"><b><i>{{notify.booked_date}}</i></b></p>
+                                    </div>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+              </div>
+             </div>
+        
+        
+             <div class="col-sm-4">
+              <div class="card">
+                <div class="card-header" style="background-color: #337ab7;color:white;">
+                    <i class="fa fa-bar-chart-o fa-fw"></i>Available Room </div>
+                <div class="card-body" style="height: 20em;">
+                   <br>
+                      <div id="chartdiv"  style="width: 113%;height:230px;margin-left: -18px;"></div>
+                </div>
+        
+              </div>
+             </div>
+        
+             <div class="col-sm-4">
+              <div class="card">
+                <div class="card-header" style="background-color: #337ab7;color:white;">
+                    <i class="fa fa-comments fa-fw"></i> Chat</div>
+                <div class="card-body" style="height: 20em;overflow: auto;">
+                    <li class="left clearfix" *ngFor="let chatnotify of chat">
+        
+                        <div class="chat-body clearfix" >
+                            <div class="header">
+                                <strong class="primary-font">{{chatnotify.customer_mobile}}</strong>
+                                <small class="pull-right text-muted">
+                                    <i class="fa fa-clock-o fa-fw"></i>{{chatnotify.booked_date}}
+                                </small>
+                            </div>
+                            <p>
+                               <label style="font-size:14px;font-weight:700;color:blue">Channel : </label> {{chatnotify.channel}}
+                            </p>
+                        </div>
+                    </li>
+        
+                  
+        
+                </div>
+                <!-- <div class="card-footer">
+                    <input type="text" placeholder="Type your text" size="25">
+                    <span>
+                        <button class="btn btn-primary btn-sm"  style="vertical-align: baseline;">
+                            Send
+                        </button>
+                    </span>
+                </div> -->
+              </div>
+             </div>
+        
+            </div>
+        

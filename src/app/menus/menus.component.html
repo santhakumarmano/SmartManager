@@ -1,0 +1,151 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#" style="color: white;">
+                  <h3 style="font-weight: 900;"><i>Smart Manager</i></h3>
+            </a>
+      
+            <!-- Links -->
+      
+            <ul class="navbar-nav ml-auto">
+                  <li class="nav-item nav-link" data-toggle="tooltip" title="Reservation" style="color: white;">
+                        <i class="fa fa-calendar-check-o"></i>
+                        <sup style="background-color: rgb(118, 230, 168);color: white;padding-left: 4px;padding-right: 4px;padding-top: 1px;margin-left: -5px;">{{Reservation}}</sup>
+                  </li>
+                  <li class="nav-item nav-link" data-toggle="tooltip" title="Modification" style="color: white;">
+                        <i class="fa fa-pencil-square-o"></i>
+                        <sup style="background-color: orange;color: white;padding-left: 4px;padding-right: 4px;padding-top: 1px;margin-left: -5px;">{{modify}}</sup>
+                  </li>
+                  <li class="nav-item nav-link" data-toggle="tooltip" title="Cancel" style="color: white;">
+                        <i class="fa fa-calendar-times-o"></i>
+                        <sup style="background-color: red;color: white;padding-left: 4px;padding-right: 4px;padding-top: 1px;margin-left: -5px;">{{cancel}}</sup>
+                  </li>
+                  <li class="nav-item nav-link" data-toggle="tooltip" title="SMS" style="color: white;">
+                        <i class="fa fa-envelope-o"></i>
+                        <sup style="background-color: rgb(123, 179, 231);color: white;padding-left: 4px;padding-right: 4px;padding-top: 1px;margin-left: -5px;">{{smscount}}</sup>
+                  </li>
+                  <li class="nav-item nav-link" data-toggle="tooltip" title="Refresh" style="color: white;">
+                        <i class="fa fa-refresh" (click)="toolbardata()"></i>
+                  </li>
+      
+                  <li class="nav-item dropdown">
+                        <a class=" nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;">
+                              <img src="assets/images/userpic.jpg" alt="Export Logo" style="width: 24px;height: 24px;border-radius: 50%;">
+                              <span style="font-weight: 450;color: white;">{{name|titlecase}}</span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="width: 15em;height: 12em;">
+                              <li>
+                                    <img src="assets/images/userpic.jpg" alt="Export Logo" style="width: 90px;height: 80px;border-radius: 50%;margin-top: 15px;margin-left: 68px;">
+      
+                              </li>
+                              <br>
+                              <div class="row" style="background-color: #f9f9f9;width: 238px;
+                              margin-left: 0px;height: 63px;">
+                                    <div class="col-sm-6" style="margin-top: 10px;">
+                                          <button class="btn btn-default btn-flat">Profile</button>
+                                    </div>
+                                    <div class="col-sm-6" style="margin-top: 10px;">
+                                          <button class="btn btn-default btn-flat" (click)="signout()">Sign out</button>
+                                    </div>
+                              </div>
+                        </div>
+                  </li>
+                  <!-- <a class="nav-item nav-link dropdown"id="navbarDropdownMenuLik" style="color: black;">
+                          <i class="fa fa-edit" style="cursor: pointer;"></i>
+      
+                          <div class="dropdown-menu dropdown-menu-right"
+                           aria-labelledby="navbarDropdownMenuLink">
+                              
+                              <div class="row" >
+                              <a></a>
+                              <a></a>
+                              <a></a>
+                                    </div>
+                          </div>
+                      </a> -->
+      
+            </ul>
+      
+      </nav>
+      
+      <div class="col-sm-12">
+            <div class="row">
+                  <div class="col-sm-2" style="padding: 0px;margin-top: -10px;">
+                        <nav id="sidebar">
+      
+                              <ul class="list-unstyled">
+                                    <li>
+                                          <img src="assets/images/userpic.jpg" alt="Export Logo" style="width: 45px;height: 45px;border-radius: 50%;margin-top: 15px;margin-left: 15px;">
+      
+                                          <span style="font-weight: 450;">{{name|titlecase}}</span>
+      
+                                    </li>
+                              </ul>
+      
+                              <ul class="list-unstyled">
+      
+                                    <li style="margin-top: 30px;margin-bottom: 20px;cursor: pointer;height: 42px;
+                padding-top: 10px;" (click)="dashboardtab()" [ngClass]="{'backgrouncolor': dasharrowflag}">
+                                          &nbsp;&nbsp;&nbsp;
+                                          <i class="fa fa-dashboard fontsize"></i>&nbsp;&nbsp;Dashboard
+                                          <span class="fa fa-angle-right" [hidden]="!dasharrowflag" style="padding-left: 102px;"></span>
+                                          <span class="fa fa-angle-down" [hidden]="dasharrowflag" style="padding-left: 102px;"></span>
+                                    </li>
+      
+                                    <li (click)="reservation()" style="margin-bottom: 20px;cursor: pointer;height: 42px;
+                padding-top: 10px;" [ngClass]="{'backgrouncolor': reservationarrowflag}">
+                                          &nbsp;&nbsp;&nbsp;
+                                          <i class="fa fa-calendar-check-o fontsize"></i>&nbsp;&nbsp;Reservation
+                                          <span class="fa fa-angle-right" [hidden]="!reservationarrowflag" style="padding-left: 95px;"></span>
+                                          <span class="fa fa-angle-down" [hidden]="reservationarrowflag" style="padding-left:  95px;"></span>
+                                    </li>
+      
+                                    <li (click)="ratesAvailtab()" style="margin-bottom: 20px;cursor: pointer;height: 42px;
+                padding-top: 10px;" [ngClass]="{'backgrouncolor': ratesavailarrowflag}">
+                                          &nbsp;&nbsp;&nbsp;
+                                          <i class="fa fa-money fontsize"></i>&nbsp;&nbsp;Rates and Availability
+                                          <span class="fa fa-angle-right" [hidden]="!ratesavailarrowflag" style="padding-left: 27px;"></span>
+                                          <span class="fa fa-angle-down" [hidden]="ratesavailarrowflag" style="padding-left:  27px;"></span>
+                                    </li>
+      
+                                    <li (click)="promotionstab()" style="margin-bottom: 20px;cursor: pointer;height: 42px;
+                padding-top: 10px;" [ngClass]="{'backgrouncolor': promotionsarrowflag}">
+                                          &nbsp;&nbsp;&nbsp;
+                                          <i class="fa fa-gift fontsize">&nbsp;&nbsp;</i>Promotions
+                                          <span class="fa fa-angle-right" [hidden]="!promotionsarrowflag" style="padding-left: 99px;"></span>
+                                          <span class="fa fa-angle-down" [hidden]="promotionsarrowflag" style="padding-left: 99px;"></span>
+                                    </li>
+                                    <li (click)="cancellationtab()" style="margin-bottom: 20px;cursor: pointer;height: 42px;
+                padding-top: 10px;" [ngClass]="{'backgrouncolor': policyarrowflag}">
+                                          &nbsp;&nbsp;&nbsp;
+                                          <i class="fa fa-address-card-o fontsize"></i>&nbsp;&nbsp;Policy
+                                          <span class="fa fa-angle-right" [hidden]="!policyarrowflag" style="padding-left: 134px;"></span>
+                                          <span class="fa fa-angle-down" [hidden]="policyarrowflag" style="padding-left: 134px;"></span>
+                                    </li>
+                                    <li style="margin-bottom: 20px;cursor: pointer;height: 42px;
+                padding-top: 10px;" (click)="configuration()" [ngClass]="{'backgrouncolor': configurationsarrowflag}">
+                                          &nbsp;&nbsp;&nbsp;
+                                          <i class="fa fa-certificate"></i>&nbsp;&nbsp;Configurations
+                                          <span class="fa fa-angle-right" [hidden]="!configurationsarrowflag" style="padding-left: 76px;"></span>
+                                          <span class="fa fa-angle-down" [hidden]="configurationsarrowflag" style="padding-left: 76px;"></span>
+                                    </li>
+                                    <li style="margin-bottom: 20px;cursor: pointer;height: 42px;
+                padding-top: 10px;" (click)="Reports()" [ngClass]="{'backgrouncolor': reportsarrowflag}">
+                                          &nbsp;&nbsp;&nbsp;
+                                          <i class="fa fa-line-chart"></i>&nbsp;&nbsp;Reports
+                                          <span class="fa fa-angle-right" [hidden]="!reportsarrowflag" style="padding-left: 125px;"></span>
+                                          <span class="fa fa-angle-down" [hidden]="reportsarrowflag" style="padding-left: 125px;"></span>
+                                    </li>
+                              </ul>
+                        </nav>
+                  </div>
+                  <div class="col-sm-10 " style="overflow: auto;max-height: 38em;">
+                        <div class="row card" style="border:1px solid grey;box-shadow: 1px 0px 1px 2px #888888;height: auto;margin: 30px 10px 20px 30px ;">
+                             
+                                    <div style="margin: 15px;">
+                                          <router-outlet></router-outlet>
+                                    </div>
+                              
+                        </div>
+                  </div>
+            </div>
+      </div>

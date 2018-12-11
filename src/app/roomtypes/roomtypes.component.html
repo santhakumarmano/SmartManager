@@ -1,0 +1,643 @@
+<div class="row"> 
+    <div class="col-sm-12">
+    <!-- <h6>Rates and Availability</h6> -->
+    </div>
+    </div> 
+    <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Grid" >Grid</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Daterange" (click)="refreshroomtype()">Setup Rate and Availability</a></li>
+            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Restriction">Restriction</a></li>
+    </ul>
+    <div class="tab-content clearfix">
+            <div id="Grid" class="tab-pane container active" style="margin-top:10px;">
+            <div class="row dropdown" style="margin-bottom: 0px;"></div>
+            <div class="col-sm-12" style="padding-left:820px;"></div>
+            <!-- <a style="color:blue;" class="dropdown-toggle"
+            data-toggle="dropdown">What does each color mean?
+        </a> -->
+
+            <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
+                    <a class=" greencss fa fa-square-o" style="padding-right: 5px;"> <span>&nbsp;&nbsp;Open</span></a>
+            
+                    <a class=" redcss fa fa-square-o" style="padding-right: 5px;"> <span>&nbsp;&nbsp;Close</span></a>
+            <a class=" yellowcss fa fa-square-o" style="padding-left: 7px;"> <span>&nbsp;&nbsp;Not Declared</span></a>
+        </div>
+        </div>
+        
+        
+        
+            
+            
+        
+            <div class="row">
+        
+            <div class="col-sm-4">
+            <font>From</font>
+            </div>
+            
+            <div class="col-sm-4">
+            <font>To</font>
+            </div>
+        
+            </div>
+        
+            <div class="row" >
+                <div class="col-sm-4">
+            <div class="input-group">
+                <input class="form-control" type="date" placeholder="dd-mm-yyyy" style="border: 1px solid gray;padding-left:15px;max-width: 12.7em; "
+                    name="dp" [(ngModel)]="fromdate">
+
+            </div>
+            </div>
+            <div class="col-sm-4">
+            <div class="input-group">
+            <input class="" class="form-control" type="date" style="border: 1px solid gray;padding-left:15px;max-width: 12.7em;"
+            name="dp" [(ngModel)]="todate3" >
+            </div>
+            </div>
+        
+        
+            <div class="col-sm-4">
+            <button type="button" class="btn btn-primary" (click)="getperioddays(fromdate,todate3)"
+            style="width: 52%;height: 35px; padding-top: 2px;border-radius: 0px;">Set Period</button>
+            </div>
+            </div>     
+    <br>
+           
+
+        
+        
+            <ng-container  *ngFor="let item of newgridget"> 
+                                
+            <table class="table table-responsive table-bordered"style="margin-top: 15PX;">
+
+                    <thead>
+                            <tr class="tabborder">
+                            <th class="tabborder text-center" style="    line-height: 15px;width:400px">Date</th>
+                            <ng-container *ngFor="let grdate of griddate">
+                                <td style="font-weight:700;    line-height: 15px;"  class="tabborder">{{grdate|date:'MMM'}}<br>{{grdate|date:'dd'}}<br>{{grdate|date:'EEE'}}</td>
+                                <!-- <td style="font-weight:700" class="tabborder"> {{grd.room_date | date:'MMM'}} <br>{{grd.room_date | date:'dd'}} <br> {{grd.room_date | date:'EEE'}} </td> -->
+                            </ng-container>
+                            </tr>
+                        </thead>
+            <tbody >
+                <tr class="rows">
+                <th class="tabborder text-center" colspan="100%"> {{item.room_name|titlecase}} </th>
+                
+                </tr> 
+                    <tr class="rows">
+                    <th class="tabborder" data-toggle="modal"  style="    line-height: 15px;width:400px">Room To Sell</th>
+                        <td *ngFor="let var_avail of item.room_to_sell;let i=index" (change)="editrmsell(i,var_avail)" style="    line-height: 15px;">
+                                <input type="text" maxlength="3" pattern="([0-9]|[0-9]|[0-9]{3})" style="padding:3px; width:30px;" [(ngModel)]="var_avail.available_count" >                                
+                        </td>
+                        
+                    </tr>
+                    <tr class="rows sortable"  *ngFor="let rmplans of item.plans">
+                        
+                            <th class="tabborder" style="    line-height: 15px;width:400px" (click)="planclick(j,data1)" data-toggle="modal"  data-target="#myModal1" *ngFor="let data1 of rmplans| unique:'rate_plan' let j=index " >{{data1.rate_plan|titlecase}}</th>
+                            <!-- <td class="tabborder" data-toggle="modal" data-target="#myModal1" *ngFor="let rmplan of item.plan_name"  (click)="planclick(j,list)">{{rmplan.name}}</td> -->
+                            
+                            <td *ngFor="let data of rmplans let j=index" (dblclick)="editfun(j,data)" [ngClass]="{'backgroundcolorgreenchange': data.room_open== '1', 'backgroundcoloryellowchange': data.room_open== 'NA','backgroundcolorredchange': data.room_open== '0'}" style="    line-height: 15px;" ></td>
+                
+                    </tr>
+                    
+                
+                </tbody>
+            <br> 
+            </table>
+            </ng-container>
+            
+            <div class="row"  style="margin-bottom: 20px;">
+            <div class="col-sm-10" ></div>
+            <div class="col-sm-2">
+            <button type="button" class="btn btn-primary"
+            (click)="sendvalues()" style="width: 60%;margin-left: 30px;">Save</button>
+            </div>
+            </div>
+        
+            </div>
+    <!-- Tab date range -->
+    
+    <div id="Daterange" class="tab-pane container fade" style="margin-top:10px;">
+        <br>
+       
+        <div class="row">
+        
+        <div class="col-sm-4">
+        <font>From*</font>
+        </div>
+        <div class="col-sm-4">
+        <font>To*</font>
+        </div>
+        </div> 
+        <div class="row" >
+        <div class="col-sm-4">
+        <div class="input-group" [class.has-error]="form.touched && form.invalid">
+        <input class=" form-control" type="date" placeholder="dd-mm-yyyy" style="border: 1px solid gray;padding-left:15px;max-width: 12.7em; "
+        name="form" id="form" [(ngModel)]="rangefrom" [min]="from1"   #form="ngModel"  required>
+        <div *ngIf="form.touched && !form.valid && form.errors?.required " ngClass="{ 'has-error' : !form.valid && submitAttempt }">
+        </div>
+        </div>
+        </div>
+        <div class="col-sm-4">
+        <div class="input-group">
+        <input class="form-control" type="date" placeholder="dd-mm-yyyy" style="border: 1px solid gray;padding-left:15px;max-width: 12.7em;"
+        name="dp" [(ngModel)]="todate2" [min]="rangefrom"  (ngModelChange)="enablinputs()">
+        </div>
+        </div>
+        
+        </div>
+        <br>
+        <br>
+        <div class="row">
+        <div class="col-1">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" value="" style="margin-left: -22px;margin-top:30px;transform: scale(0.7);"[(ngModel)]="user.sund" [disabled]=disvar> Sun</label>
+        </div>
+        <div class="col-1">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" value="" style="margin-left: -22px;margin-top:30px;transform: scale(0.7);"[(ngModel)]="user.mon" [disabled]=disvar>Mon</label>
+        </div>
+        <div class="col-1">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" value="" style="margin-left: -22px;margin-top:30px;transform: scale(0.7);"[(ngModel)]="user.tue" [disabled]=disvar>Tue</label>
+        </div>
+        <div class="col-1">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" value="" style="margin-top:30px;transform: scale(0.7);"[(ngModel)]="user.wed" [disabled]=disvar>Wed</label>
+        </div>
+        <div class="col-1">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" value="" style="margin-top:30px;transform: scale(0.7);"[(ngModel)]="user.thur" [disabled]=disvar>Thur</label>
+        </div>
+        <div class="col-1">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" value="" style="margin-left: -25px;margin-top:30px;transform: scale(0.7);"[(ngModel)]="user.fri" [disabled]=disvar>Fri</label>
+        </div>
+        <div class="col-1">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" value="" style="margin-left: -25px;margin-top:30px;transform: scale(0.7);"[(ngModel)]="user.sat" [disabled]=disvar>Sat</label>
+        </div>
+        
+        
+        </div> 
+        
+        <br> <br>
+        <div class="row">
+        <div class="col-sm-2">
+        <font>Room Type*</font>
+        </div>
+        <div class="col-sm-2">
+            <font>Rate Plan*</font>
+        </div> 
+        <div class="col-sm-2">
+        <font>Room To Sell*</font>
+        </div>
+        <div class="col-sm-2">
+        <font>Price(single/double)*</font>
+        </div>
+        <div class="col-sm-2">
+        <font>Extra Adults price*</font>
+        </div> 
+        
+        
+        </div> 
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="input-group">
+                <select class="form-control" id="roomsizeid"  style="height: 2.4em;border: 1px solid gray;" [(ngModel)]="user.room_id" (ngModelChange)="onChangeObj($event,user)" #roomsizeid="ngModel" [disabled]=disvar required>
+                <option *ngFor="let list of roomtypes" [ngValue] = "list.room_id"> {{list.room_name}}</option> 
+                </select>
+                </div>
+                </div>
+                <div class="col-sm-2">
+                <div class="input-group">
+                <select class="form-control" name="roomsizeid" style="height: 2.4em;border: 1px solid gray;" [(ngModel)]="user.rate_plan_id" [disabled]=enrate>
+                <option *ngFor="let list of rateplan" [ngValue] = "list.rate_plan_id"> {{list.rate_plan}}</option> 
+                </select>
+                    </div>
+                    </div>
+        <div class="col-sm-2">
+        <div class="input-group" >
+        <input type="number" class="form-control" id="roomtos" style="border: 1px solid gray;padding-left:15px;max-width: 13.2em;" pattern="^\d+$" [(ngModel)]="user.roomtosell" #roomtos="ngModel" [disabled]=disvar  required>
+    </div>
+        </div>
+        
+        <div class="col-sm-2"> 
+        <div class="input-group">
+            <input type="number" class="form-control" name="roomprice" id="roomprice" style="border: 1px solid gray;padding-left:15px;max-width: 13.2em;" [(ngModel)]="user.rangeprice" #roomprice="ngModel" [disabled]=disvar required>
+        
+        </div>
+        </div>
+        <div class="col-sm-2">
+        <div class="input-group">
+        <input type="number" class="form-control" name="extra_adult" id="" style="border: 1px solid gray;padding-left:15px;max-width: 13.2em;"[(ngModel)]="user.extra_adult_rate" #extra ="ngModel" [disabled]=disvar required>
+        </div>
+        </div> 
+        
+        
+        <div class="col-sm-2">
+        <button type="submit" class="btn btn-info"
+        style="width: 52%;height: 35px; padding-top: 2px;border-radius: 0px;"(click)="daterangedetails(user)">Save</button>
+        </div>
+
+        </div> 
+        
+
+    
+        <div class="row" *ngIf="roomTypesFieldErrorFlag">
+            <label style="margin-left: 380px;font-weight: 600;color: red;margin-top: 10px;">Enter all fields</label>
+        </div>
+  
+        </div>
+    
+    
+    <!-- Restriction details -->
+    <div id="Restriction" class="tab-pane container fade" style="margin-top:10px;">
+        <br>
+       
+            <form #res="ngForm">
+        <div class="row">
+        <div class="col-md-4">
+        Rate Restriction
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-4">
+        <div class="input-group">
+        <select class="form-control" name="mini_stay" id="" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;height: 36px;max-width:16em" [(ngModel)]="rate_res.dropdownvalue" (change)="showhiderestriction(rate_res.dropdownvalue)">
+        <option value="Minimum Stay">Minimum Stay</option>
+        <option value="Maximum Stay">Maximum Stay</option>
+        <option value="Open For Arrival">Open For Arrival </option>
+        <option value="Open For Departure">Open For Departure </option>
+        <option value="Close For Arrival">Close For Arrival </option>
+        <option value="Close For Departure">Close For Departure </option>
+        <option value="House Close">House Close </option>
+        </select>
+        </div> 
+        </div>
+        </div>
+        <br>
+        <div >
+        <br>
+        <div *ngIf="mini!=true" >
+        <div class="row"> 
+        <div class="col-sm-3">
+        <font>Minimum stay</font>
+        </div>
+        <div class="col-sm-3">
+        
+        <div class="input-group">
+        <input type="number" class="form-control" name="mini_stay" id="" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width:11.9em;height: 36px;"[(ngModel)]="rate_res.min_stay">
+        </div> 
+        </div> 
+        </div>
+        <br>
+        <div class="row"> 
+        <div class="col-sm-3">
+        <font>Date</font>
+        </div>
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" type="date" [min]="from1" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="dp" [(ngModel)]="rate_res.min_date" >
+        </div>
+        </div>
+        
+        </div>
+        </div>
+        
+        <div *ngIf="max==true">
+        <div class="row">
+        <div class="col-sm-3">
+        <font>Maximum stay</font>
+        </div>
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input type="number" class="form-control" name="maximum" id="" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width:11.9em;height: 36px;" [(ngModel)]="rate_res.max_stay">
+        </div> 
+        </div> 
+        </div>
+        <br>
+        <div class="row"> 
+        <div class="col-sm-3">
+        <font>Date</font>
+        </div> 
+        
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" type="date" [min]="from1" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="maximu" [(ngModel)]="rate_res.max_date" >
+        </div>
+        </div> 
+        </div>
+        </div>
+        
+        <div *ngIf="openarrival==true">
+        <div class="row">
+        <div class="col-sm-3">
+        <font>From</font>
+        </div>
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" [min]="from1" type="date" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="open_arrival_from" [(ngModel)]="rate_res.open_arrival_from" >
+        </div>
+        </div>
+        </div>
+        <br>
+        
+        <div class="row"> 
+        <div class="col-sm-3">
+        <font>To</font>
+        </div> 
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" [min]="rate_res.open_arrival_from" type="date" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="open_arrival_to" [(ngModel)]="rate_res.open_arrival_to" >
+        </div>
+        </div> 
+        </div>
+        </div>
+        
+        <div *ngIf="opendeparture==true"> 
+        <div class="row">
+        <div class="col-sm-3">
+        <font>From Date</font>
+        </div>
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" [min]="from1" type="date" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="open_departure_from" [(ngModel)]="rate_res.open_departure_from" >
+        </div>
+        </div>
+        </div>
+        <br>
+        <div class="row"> 
+        <div class="col-sm-3">
+        <font>To Date</font>
+        </div> 
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" type="date" [min]="rate_res.open_departure_from" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="open_departure_to" [(ngModel)]="rate_res.open_departure_to" >
+        </div>
+        </div> 
+        </div>
+        </div>
+        
+        <div *ngIf="closearrival==true">
+        <div class="row">
+        <div class="col-sm-3">
+        <font>From</font>
+        </div>
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" [min]="from1" type="date" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="close_arrival_from" [(ngModel)]="rate_res.close_arrival_from" >
+        </div>
+        </div>
+        </div>
+        <br>
+        
+        <div class="row"> 
+        <div class="col-sm-3">
+        <font>To</font>
+        </div> 
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" [min]="rate_res.close_arrival_from" type="date" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="close_arrival" [(ngModel)]="rate_res.close_arrival_to" >
+        </div>
+        </div> 
+        </div>
+        </div>
+        
+        <div *ngIf="closedeparture==true"> 
+        <div class="row">
+        <div class="col-sm-3">
+        <font>From Date</font>
+        </div>
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" [min]="from1" type="date" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="close_from" [(ngModel)]="rate_res.close_departure_from" >
+        </div>
+        </div>
+        </div>
+        <br>
+        <div class="row"> 
+        <div class="col-sm-3">
+        <font>To Date</font>
+        </div> 
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy" type="date" [min]="rate_res.close_departure_from" style="border-radius: 5px;border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;"
+        name="close_departure" [(ngModel)]="rate_res.close_departure_to" >
+        </div>
+        </div> 
+        </div>
+        </div>
+        
+        <div *ngIf="houseclose==true">
+        <div class="row">
+        <div class="col-sm-3">
+        <font>Date</font>
+        </div>
+        <div class="col-sm-3">
+        <div class="input-group">
+        <input class="" placeholder="dd-mm-yyyy"  type="date" [min]="from1" style="border: 1px solid gray;padding-left:15px;max-width: 13.2em;height: 36px;border-radius: 5px;"
+        name="houseclose" [(ngModel)]="rate_res.house_close" >
+        </div>
+        </div> 
+        </div> 
+        </div>
+        <br>
+        </div>
+        <br>
+        
+        <div class="row">   
+        <div class="col-md-5">
+            <!-- <div class="row" > -->
+                <label *ngIf="roomTypesFieldErrorFlag" style="margin-left: 200px;font-weight: 600;color: red;margin-top: 10px;">Enter all fields</label>
+            <!-- </div> -->
+        </div>
+        <div class="col-md-2">
+        <button type="button" class="btn btn-info"
+        style="height: 35px; padding-top: 2px;border-radius: 0px;"(click)="restrcitdeatils(rate_res);res.reset()">Save</button>
+        </div>
+        <div class="col-md-5"></div>
+        </div> 
+    </form>
+    
+        </div>
+    
+    <!-- restriction End -->
+    </div>
+    
+    <!-- </div> -->
+    
+    
+    <!-- modal for edit sell room -->
+    
+    
+    <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+    <div class="modal-content" style="width: 110%;left: -65px;top: 35px;">
+    
+    <!-- Modal Header -->
+    <div class="modal-header" style="height: 50px;background-color:#007bff;">
+    <h5 class="modal-title" style="padding-left: 180px;color: white; margin-top: -9px;">Room to Sell</h5>
+    <button type="button" class="close" data-dismiss="modal"
+    style="margin-top: -24px;color: white;">&times;</button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body" >
+    
+    <div class="row">
+    <div class="col-sm-6">
+    <label>Start Date</label>
+    </div>
+    <div class="col-sm-6">
+    <label>End Date</label>
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-6">
+    <div class="input-group">
+    <input class="" placeholder="yyyy-mm-dd" style="border:1px solid gray;padding-left:15px;max-width: 10em;"
+    name="dp" [(ngModel)]="popfromdate" ngbDatepicker #d3="ngbDatepicker">
+    <div class="input-group-append">
+    <button class="btn btn-outline-secondary" (click)="d3.toggle()" type="button"
+    style="border-radius: 0px;">
+    <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+    </button>
+    </div>
+    </div>
+    </div>
+    <div class="col-sm-6">
+    <div class="input-group">
+    <input class="" placeholder="yyyy-mm-dd" style="border:1px solid gray;padding-left:15px;max-width: 10em;"
+    name="dp" [(ngModel)]="poptodate" ngbDatepicker #d4="ngbDatepicker">
+    <div class="input-group-append">
+    <button class="btn btn-outline-secondary" (click)="d4.toggle()" type="button"
+    style="border-radius: 0px;">
+    <img src="assets/images/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+    </button>
+    </div>
+    </div>
+    </div>
+    </div>
+    <br>
+    
+    <div class="row" style="margin-top: 15px;">
+    <div class="col-sm-6">
+    <label style="font-weight: 500;">{{labelforroom}}</label>
+    
+    </div>
+    <div class="col-sm-6">
+    <input type="number" [(ngModel)]="sellroomorbasicrate">
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-sm-6">
+    <p>{{labelundrinfo}}</p>
+    </div>
+    </div>
+    </div>
+    
+    <!-- Modal footer -->
+    <div class="modal-footer" style="height: 56px;">
+    <button type="button" class="btn "[hidden]="!sellmodalsavebut"
+    (click)="savesellroom()" data-dismiss="modal">Save Changes</button>
+    
+    <button type="button" class="btn" [hidden]="!editsavebut"
+    (click)="saveeditbasicprice()" data-dismiss="modal">Save Changes</button>
+    
+    <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
+
+    <!-- Grid modal screen -->
+
+
+
+    
+    <!-- modal1 -->
+    <div class="modal fade" id="myModal1">
+    <div class="modal-dialog " style="width:100%; margin-left: 324px; margin-top: 89px;">
+    <div class="modal-content" style="width: 986px;" >
+    
+    <!-- Modal Header -->
+    <div class="modal-header">
+    <h4 class="modal-title" style="    margin-left: 400px;margin-right: 350px;">{{grid_plan_name|titlecase}}</h4>
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    </div>
+    <!-- Modal body -->
+    <div class="modal-body"> 
+    <div class="container">
+    <table class=" table  table-bordered table-responsive">
+    <thead>
+    
+    </thead>
+    <tbody class=" table  table-bordered "> 
+    <ng-container *ngFor="let roomdate of pop_up_value let i=index">
+    <tr  style="height: 41px;" >
+        <td class="tabbor text-left"  ><b>RoomDate</b></td>     
+        <td style="font-weight:600" class="tabborder" class="tabbor" *ngFor="let planA of roomdate">  {{planA.room_date|date:'MMM'}}<br>{{planA.room_date|date:'dd'}}<br>{{planA.room_date|date:'EEE'}}</td>  
+    </tr>
+    <tr style="height: 10px;">
+        <td class="tabbor text-left"><b>RoomRate</b></td>
+    
+        <td style="font-weight:600" class="tabborder" class="tabbor" *ngFor="let planA of roomdate"><input class="text-center" type="number" name="roomrat" style="width:45px;" [(ngModel)]="planA.room_rate" ></td>
+   
+    </tr>
+    <tr style="height: 10px;">
+        <td class="tabbor text-left" ><b>Extra Adult Rate</b></td>
+        
+        <td style="font-weight:600" class="tabborder" class="tabbor" *ngFor="let planA of roomdate"><input class="text-center" type="number" name="roomopen" style="width:30px;" [(ngModel)]="planA.extra_adult_rate" ></td>
+   
+    </tr>
+    <tr style="height: 10px;">
+        <td class="tabbor text-left"><b>MinStay</b></td>
+        
+        <td style="font-weight:600" class="tabborder" class="tabbor" *ngFor="let planA of roomdate"><input class="text-center" type="number" name="roommin" style="width:30px;" [(ngModel)]="planA.min_stay" > </td>
+    
+    </tr>
+    <tr style="height: 10px;">
+        <td class="tabbor text-left"><b>MaxStay</b></td>
+    
+        <td style="font-weight:600" class="tabborder" class="tabbor" *ngFor="let planA of roomdate"><input class="text-center" type="number" name="roommax" style="width:30px;" [(ngModel)]="planA.max_stay" > </td>
+   
+    </tr>
+    <tr style="height: 10px;">
+        <td class="tabbor text-left"><b>CloseArrival</b></td>
+        
+        <td style="font-weight:600" class="tabborder" class="tabbor" *ngFor="let planA of roomdate"><input class="text-center" type="number" name="roomarr" style="width:30px;" [(ngModel)]="planA.close_arrival" ></td>
+    
+    </tr>
+    <tr style="height: 10px;">
+        <td class="tabbor text-left"><b>CloseDeparture</b></td>   
+        <td style="font-weight:600" class="tabborder" class="tabbor" *ngFor="let planA of roomdate"><input class="text-center" type="number" name="roomdep" style="width:30px;" [(ngModel)]="planA.close_departure" ></td> 
+    </tr>
+    <tr style="height: 10px;">
+        <td class="tabbor text-left"><b>House Close</b></td>   
+        <td style="font-weight:600" class="tabborder" class="tabbor" *ngFor="let planA of roomdate"><input class="text-center" type="number" name="roomhous" style="width:30px;" [(ngModel)]="planA.close_departure" ></td> 
+    </tr>
+
+    </ng-container>
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <!-- Modal footer -->
+    <div class="modal-footer" style="margin-top: -25px">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="sendvalpopgrid(planA)">Save</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+    <!-- -->
+
+    

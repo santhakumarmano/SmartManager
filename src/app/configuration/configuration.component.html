@@ -1,0 +1,506 @@
+  
+<div class="row">
+  <div class="col-md-12">
+    <ul class="nav nav-tabs">
+      <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Grid">Room Type</a></li>
+      <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Daterange" (click)="refreshroom()" (click)="clickrateplan()">Rate Plan</a></li>
+    </ul>
+  </div>
+</div>
+
+
+ <!-- The Modal -->
+ <div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content" style="top: 150px;border-radius: 1px;">
+    
+      <!-- Modal Header -->
+      <div class="modal-header" style="background-color: #1a3d5c;color: white;border-radius: 1px;height: 50px;
+      padding-top: 10px;">
+        <h6 class="modal-title">Message</h6>
+        <button type="button" class="close" data-dismiss="modal" style="color: white; height: 40px;
+        margin-top: -2px;padding-top: 2px;">&times;</button>
+      </div>
+      
+      <!-- Modal body -->
+      <div class="modal-body">
+        {{message}}
+      </div>
+      
+      <!-- Modal footer -->
+      <div class="modal-footer" style="height: 50px;">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #1a3d5c;
+        border: 1px solid #1a3d5c;   "> Close</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<div class="tab-content clearfix">
+<div id="Grid" class="tab-pane container active" style="margin-top:10px;">
+<div class="row" *ngIf="showMore!=true" >
+  <div class="col-md-3"  *ngFor="let room of roomdetails " style="margin-bottom:5px;">
+    <div class="card" (click)="viewdata(room)">
+        <img class="card-img-top hovercss" alt="Card image"
+        [src]="room.upload_photos"
+       style="width: 100px;margin-left: 62px; margin-top: 20px;height: 100px;border-radius: 50%;">
+      <div class="card-body">
+          <h6 style="text-align: center;">{{room.room_name|titlecase}}</h6>
+          <!-- <p class="card-text" style="text-align: center;margin-top: -12px;">Price :&nbsp;{{roomdetails.standard_rate}}</p> -->
+
+      </div>
+      <div class="card-footer">
+        <!-- <p><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+        </span> {{room.size_of_room|titlecase}}</p>
+        <p><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+        </span>{{room.bed_option|titlecase}}</p>
+        <p ><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+        </span>{{room.extrabed|titlecase}}</p>  -->
+        <!-- <div *ngFor="let amen of amentite_details"> -->
+        <p ><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+        </span>{{room.amentie_name1}}</p>
+        <p ><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+        </span>{{room.amentie_name2}}</p>
+        <p ><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+        </span>{{room.amentie_name3}}</p>
+      <!-- </div> -->
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+    <div class="col-md-3" (click)="Queryselectoptions()">
+    <div class="card"  data-toggle="modal" data-target="#roomplan">
+        <i class="fa fa-plus fa-7x text-center"
+       style="margin-left: 62px;font-size:100px;margin-top: 20px;height: 100px;width: 100px;"></i>
+
+      <div class="card-body">
+        <h6 style="text-align:center">Room Name</h6>
+      </div>
+      <div class="card-footer">
+      <p><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+      </span>Room Configuration</p>
+      <p><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+      </span> Bar Facilities</p>
+      <p><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+      </span>Room Facilities</p>
+      </div>
+    </div>
+  </div>
+  <br>
+</div>
+<div *ngIf="showMore==true">
+    <div class="row">
+      <div class="col-md-3">
+        <font>Room Name</font>
+      </div>
+      <div class="col-md-3">
+        <font> Room Size </font>
+      </div>
+      <div class="col-md-3">
+       <font>Min Adults </font> 
+      </div>
+      <div class="col-md-3">
+        <font>Default Child </font>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="contact-form-textfield">
+      <input type="text" name="" id="" class="form-control" disabled [(ngModel)]="room">
+    </div>
+    </div>
+    <div class="col-md-3">
+        <select class="form-control" name="roomsizeids" style="height: 2.4em;border:1px solid #A0A0A0;" [(ngModel)]="rmsize">
+            <option *ngFor="let list of roomsize" [ngValue] = "list.room_size_id"> {{list.size_of_room}}</option> 
+          </select>
+    </div>
+    <div class="col-md-3">
+      <input type="text" name="" id="" class="form-control" style="width: 100%;" [(ngModel)]="maxadult">
+    </div>
+    <div class="col-md-3">
+      <input type="text" name="" id="" class="form-control" style="width: 100%;" [(ngModel)]="maxchild">
+    </div>
+  </div>
+    <div class="row">
+  
+    <div class="col-md-3">
+      <font>Bedding</font>
+    </div>
+    <div class="col-md-3">
+      <font>Bed Size </font>
+    </div>
+    <div class="col-md-3">
+     <font>Max Extrabed</font> 
+    </div>
+    <div class="col-md-3">
+      <font>Room Amenities </font>
+    </div>
+  
+  </div>
+  <div class="row">
+      <div class="col-md-3">
+          <select class="form-control" name="confbedding" style=" height: 2.4em;border:1px solid #A0A0A0; " [(ngModel)]="beding">
+            <option *ngFor="let list1 of bedding" [ngValue] = "list1.bedding_option_id"> {{list1.bed_option}}</option> 
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-control" name="bedsize" style=" height: 2.4em; border:1px solid #A0A0A0;" [(ngModel)]="bedsize">
+            <option *ngFor="let list of beddingsize" [ngValue] = "list.bed_size_id"> {{list.bed_size}}</option> 
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-control" name="extrabed" style=" height: 2.4em; border:1px solid #A0A0A0;" [(ngModel)]="extrabeds">
+            <option *ngFor="let list of extrabed" [ngValue] = "list.extrabed_id"> {{list.extrabed}}</option> 
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-control" name="extrabed" style=" height: 2.4em; border:1px solid #A0A0A0;" [(ngModel)]="amenitie">
+            <option *ngFor="let list of roomamenities" [ngValue] = "list.amenitie_id"> {{list.amenitie}}</option> 
+          </select>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <font>Photos</font>
+    </div>
+    <div class="col-md-3">
+      <font>Min Price</font>
+    </div>
+    <div class="col-md-3">
+      <font>Smoking</font>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="input-group">
+        <input type="text" name="" id=""  style="width: 9.0em; height: 2.4em;" [(ngModel)]="photo">
+        <span><button style="height: 2.4em;" data-toggle="modal" data-target="#imag"><i class="fa fa-ellipsis-h"></i></button></span>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <input type="text" name="" id="" style="width: 230px; height: 2.4em;" class="form-control" [(ngModel)]="minprice">
+    </div>
+    <div class="col-md-3">
+      <input type="checkbox" name="" id="" style=" width:30px; height:30px;margin-top: 5px;margin-left: 10px;" [(ngModel)]="smoke">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+      <div class="col-md-5"></div>
+    <div class="col-md-2">
+    <button type="button" class="btn btn-success" (click)="updateconfig(room,rmsize,maxadult,maxchild,beding,bedsize,extrabeds,amenitie,photo,minprice,smoke,rmid)" ><b>Save</b></button>
+   </div>
+   <div class="col-md-5"></div>
+  </div>
+  </div>
+</div>
+<div id="Daterange" class="tab-pane container fade" style="margin-top:10px;">
+  <!-- <div class="row">
+    <div class="col-md-3"  *ngFor="let room of view_rateplan_details ">
+        <div class="card" (click)="viewrateplan(room)">
+            <img class="card-img-top hovercss" alt="Card image"
+            src="../../assets/images/Standard Room.jpg"
+           style="width: 45%;margin-left: 62px; margin-top: 10px;height: 45%;border-radius: 50%;">
+          <div class="card-body">
+              <h6 style="text-align: center;">{{room.rate_plan|titlecase}}</h6>
+              <p class="card-text" style="text-align: center;margin-top: -12px;">Price :&nbsp;{{roomdetails.standard_rate}}</p>
+    
+          </div>
+          <div class="card-footer">
+
+            <p ><span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+            </span>{{room.policy_name}}</p>
+       
+      
+          </div>
+        </div>
+      </div>
+    </div> -->
+<div class="row">
+    
+  <div class="col-md-4">
+    <font><b><h6>Rate Plan</h6></b></font>
+  </div>
+  <div class="col-md-4">
+      <font><b><h6>Cancellation Policy</h6></b></font>
+    </div>  
+</div>
+<div class="row">
+  <div class="col-md-4">
+      <input type="text" name="" id="" style="width: 13.0em; height: 2.4em;" [(ngModel)]="conf_rate.rate_plan_id">
+    <!-- <select class="form-control" name="roomsizeid" style="height: 2.4em;" [(ngModel)]="rate_plan_id">
+      <option *ngFor="let list of rateplan" [ngValue] = "list.rate_plan_id"> {{list.rate_plan}}</option> 
+>
+    </select> -->
+  </div>
+  <div class="col-md-4">
+    <select class="form-control" name="roomsizeid" style="width: 13.0em;height: 2.4em;" [(ngModel)]="conf_rate.policy_id">
+      <option *ngFor="let list of cancelpolicy" [ngValue] = "list.policy_id"> {{list.policy_name}}</option> 
+      </select>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-md-4">
+        <font><b><h6>From Date</h6></b></font>
+      </div>
+     <div class="col-md-4">
+      <font><b><h6>To Date</h6></b></font>
+    </div>  
+</div>
+<div class="row">
+  <div class="col-md-4">
+      <input type="date" [min]="date" name="Fromdate" id="Fromdate" style="border: 1px solid lightgray;padding-left:15px;width: 12.7em; height: 2.4em;" [(ngModel)]="conf_rate.fromdate" #Fromdate="ngModel">
+
+    </div>
+   <div class="col-md-4">
+    <input type="date" [min]="conf_rate.fromdate" name="date1" id="date1" style="border: 1px solid lightgray;padding-left:15px;width: 12.7em; height: 2.4em;" [(ngModel)]="conf_rate.todate" #date1="ngModel">
+  </div>
+</div>
+<div class="row">
+<div class="md-errors-spacer" [hidden]="Fromdate.valid || Fromdate.untouched">
+  <div *ngIf="Fromdate.errors && rate_plan.errors.required" style="color: red;margin-left:25px;margin-right: 60px;
+   text-align: left;font-size:12px; margin-top: -3px">
+  *From Date  is required
+ </div>
+</div>
+
+<div class="md-errors-spacer" [hidden]="date1.valid || date1.untouched">
+<div *ngIf="date1.errors && rate_plan.errors.required" style="color: red;margin-left:162px;margin-right: 60px;
+ text-align: left;font-size:12px; margin-top: -3px">
+*To Date  is required
+</div>
+</div>
+</div>
+<br>
+<div class="row" style="padding-bottom:5px;">
+  <div class="col-md-4">
+    <font><b><h6>Room Types</h6></b></font>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-3" *ngFor="let list of roomtypes">
+      <input type="checkbox" value="{{list.room_id}}" style="width: 1rem;height: 1rem;" (change)="onroomCheckboxChange(list,$event)"><label  style="margin-left:10px;">{{list.room_name}}</label>
+  </div>
+  <!-- <table>
+    <tbody>
+      <tr style="margin-left:15px;">
+        <td *ngFor="let list of roomtypes">
+          <input type="checkbox" value="{{list.room_id}}" style="width: 1rem;height: 1rem;" (change)="onroomCheckboxChange(list,$event)"><label  style="margin-left:10px;">{{list.room_name}}</label>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+</div>
+<br>
+<div class="row" style="padding-bottom:5px;">
+    <div class="col-md-4">
+      <font><b><h6>Packages</h6></b></font>
+    </div> 
+  </div>
+  <div class="row"  >
+    <div class="col-md-3" *ngFor="let list of pakages"> 
+        <input type="checkbox" value="{{list.packages_id}}" style="width: 1rem;height: 1rem;" (change)="onCheckboxChange(list,$event)"><label  style="margin-left:10px;">{{list.package}}</label>
+    </div>
+
+          <!-- <table>
+              <tbody>
+                <tr style="margin-left:15px;">
+                  <td *ngFor="let list of pakages">
+                    <input type="checkbox" value="{{list.packages_id}}" style="width: 1rem;height: 1rem;" (change)="onCheckboxChange(list,$event)"><label  style="margin-left:10px;">{{list.package}}</label>
+                  </td>
+                </tr>
+              </tbody>
+            </table> -->
+          <!-- <div class="checkbox" *ngFor="let list of pakages">
+              <label>
+                <input  type="checkbox" value="{{list.packages_id}}" (change)="onCheckboxChange(list,$event)">{{list.package}}</label>
+            </div> -->
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <label *ngIf="roomTypesFieldErrorFlag" style="margin-left: 200px;font-weight: 600;color: red;">Enter all fields</label>
+
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-success"(click)="insertrateplan(conf_rate)" >Save</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    
+    <div class="row">
+        
+        <!-- <div class="col-md-5">
+            <label *ngIf="roomTypesFieldErrorFlag" style="margin-left: 200px;font-weight: 600;color: red;">Enter all fields</label>
+
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-success"(click)="insertrateplan(conf_rate)" >Save</button>
+        </div> -->
+    </div>
+</div>  
+</div>
+
+
+
+     <!-- Room plan start-->
+     <div class="modal fade" id="roomplan" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content" style="width:167%;margin-left:-35%;">
+            <div class="modal-header">
+              <h4 style="margin-left:40%;"> Room Type</h4>
+              <button type="button" class="close" style="margin-right:5px;" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="card" style="width: 817px">
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <font>Room Name*</font>
+                </div>
+                <div class="col-md-3">
+                  <font> Room Size* </font>
+                </div>
+                <div class="col-md-3">
+                 <font>Min Adults* </font> 
+                </div>
+                <div class="col-md-3">
+                  <font>Default Child* </font>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-md-3">
+                <input type="text" name="" id="" style="width: 11.0em; height: 2.4em;" [(ngModel)]="plan.room_name">
+              </div>
+              <div class="col-md-3">
+                <select class="form-control" name="roomsizeid" style="width: 11.0em;height: 2.4em;border:1px solid #A0A0A0;" [(ngModel)]="plan.room_size_id">
+                <option *ngFor="let list of roomsize" [ngValue] = "list.room_size_id"> {{list.size_of_room}}</option> 
+              </select>
+              </div>
+              <div class="col-md-3">
+                <input type="text" name="" id="" style="width: 11.0em; height: 2.4em;" [(ngModel)]="plan.max_adults">
+              </div>
+              <div class="col-md-3">
+                <input type="text" name="" id="" style="width: 11.0em; height: 2.4em;" [(ngModel)]="plan.max_child">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <font>Bedding*</font>
+              </div>
+              <div class="col-md-3">
+                <font>Bed Size* </font>
+              </div>
+              <div class="col-md-3">
+               <font>Max Extrabed*</font> 
+              </div>
+              <div class="col-md-3">
+                <font>Room Amenities* </font>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <select class="form-control" name="bedding" style="width: 11.0em; height: 2.4em;border:1px solid #A0A0A0; " [(ngModel)]="plan.bedding_option_id">
+                  <option *ngFor="let list of bedding" [ngValue] = "list.bedding_option_id"> {{list.bed_option}}</option> 
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select class="form-control" name="bedsize" style="width: 11.0em; height: 2.4em; border:1px solid #A0A0A0;" [(ngModel)]="plan.bed_size_id">
+                  <option *ngFor="let list of beddingsize" [ngValue] = "list.bed_size_id"> {{list.bed_size}}</option> 
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select class="form-control" name="extrabed" style="width: 11.0em; height: 2.4em; border:1px solid #A0A0A0;" [(ngModel)]="plan.extrabed_id">
+                  <option *ngFor="let list of extrabed" [ngValue] = "list.extrabed_id"> {{list.extrabed}}</option> 
+                </select>
+              </div>
+              <div class="col-md-3">
+                <select class="form-control" name="extrabed" style="width: 11.0em; height: 2.4em; border:1px solid #A0A0A0;" [(ngModel)]="plan.amenitie_id">
+                  <option *ngFor="let list of roomamenities" [ngValue] = "list.amenitie_id"> {{list.amenitie}}</option> 
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <font>Photos</font>
+              </div>
+              <div class="col-md-3">
+                <font>Min Price*</font>
+              </div>
+              <div class="col-md-3">
+                <font>Smoking</font>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="input-group">
+                <input type="text" name="" id=""  style="width: 9.0em; height: 2.4em;" [(ngModel)]="plan.upload_photos">
+                <span><button style="height: 2.4em;" data-toggle="modal" data-target="#imag"><i class="fa fa-ellipsis-h"></i></button></span>
+              </div>
+              </div>
+              <div class="col-md-3">
+                <input type="text" name="" id="" style="width: 11.0em; height: 2.4em;" [(ngModel)]="plan.min_price">
+              </div>
+              <div class="col-md-3">
+                <input type="checkbox" name="" id="" style=" width:30px; height:30px;margin-top: 5px;margin-left: 10px;" [(ngModel)]="plan.smoking">
+              </div>
+            </div>
+            </div>
+          </div>
+          <!-- <div class="col-md-5"> -->
+         
+                <!-- <label *ngIf="roomTypesFieldErrorFlag" style="margin-left: 200px;font-weight: 600;color: red;margin-top: 10px;">Enter all fields</label>
+             
+        </div> -->
+            <div class="modal-footer">
+                <label *ngIf="roomTypesFieldErrorFlag" style="margin-left: 200px;font-weight: 600;color: red;">Enter all fields</label>
+                <button type="button" class="btn btn-success" (click)="insertroom(plan)" ><b>Save</b></button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><b>Close</b></button>
+  
+            </div>
+          </div>
+          
+        </div>
+      </div> 
+      <!-- Room Plan End --> 
+
+           <!-- Room plan start-->
+     <div class="modal fade" #imag id="imag" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content" style="width:167%;margin-left:-35%;" >
+            <div class="modal-header">
+              <h4 style="margin-left:40%;"> Choose Image</h4>
+              <button type="button" class="close" style="margin-right:5px;" data-dismiss="modal">&times;</button>
+            </div>
+           
+            <div class="modal-body">
+                <form #imageForm=ngForm (ngSubmit)="onSubmit(Caption,Image)" style=padding:30px>
+                    <div class="row">
+                        <label class="input-group-btn">
+                          <span class="btn btn-primary">
+                            Browse&hellip;
+                            <input style="display: none;" type="file" file="file" #Image accept="image/*" (change)="handleFileInput($event.target.files)">
+                          </span>
+                        </label>
+                      </div>
+                      <div class="row">
+                        <img [src]="imageUrl" style="width:300px;height:200px;">
+                      </div>
+                      <div class="row">
+                        <button style="position: absolute; right: 30px;" type="submit" class="btn btn-success btn-submit" [disabled]="Image.value=='' || !imageForm.valid" >Submit</button>
+                      </div>
+                  </form>
+          </div>
+       <div class="modal-footer"></div>
+          
+        </div>
+      </div> 
+      <!-- Room Plan End --> 

@@ -1,0 +1,182 @@
+<form #ClearAll="ngForm">
+<div class="row">
+  
+  <div class="col-md-12">
+      <!-- <h6>Reservation</h6> -->
+  </div>
+</div>
+<div *ngIf="showMore!=true">
+<div class="row">
+  <div class="col-md-4">
+    <font> Arrival</font>
+  </div>
+  <div class="col-md-4">
+    <font style="margin-left: -87px;"> Departure</font>
+  </div>
+  <div class="col-md-4">
+    <font style="margin-left: -170px;"> Search</font>
+  </div>
+
+</div>  
+<div class="row">
+    <div class="col-md-3">
+    <div class="input-group">
+      <input type="date"  placeholder="YYYY-MM-DD" class="form-control" style="border: 1px solid gray;padding-left:15px;max-width: 12em; " id="fromdate" name="fromdate" [(ngModel)]="date" (change)="filterDatefrmList(date,dep_date)">
+
+    </div>
+    </div>
+    <div class="col-md-3">
+        <div class="input-group">
+            <input type="date"  placeholder="YYYY-MM-DD" style="border: 1px solid gray;padding-left:15px;max-width: 12em; " class="form-control" id="dep_date" name="dep_date"[min]="date" [(ngModel)]="dep_date" (change)="filterDatefrmList(date,dep_date)">
+          </div>
+    </div>
+    <div class="col-md-3">
+        <input type="text"  class="form-control" name="conf_num" id="conf_num" [(ngModel)]="conf_num" style="border: 1px solid gray; height: 2.4em; max-width: 12.2em; ">
+    </div>
+    <div class="col-mg-3">
+        <button type="button" class="btn btn-warning" (click)="cleartab();ClearAll.reset()">Clear</button>
+       
+    </div>
+</div>
+<br>
+<div class="row" >
+  <div class="col-md-12">
+<table class="table table-bordered table-hover fixtab" style="margin-top: -14px;">
+  <thead style="background-color:#337ab7;color: white">
+    <tr>
+      <th style="width:50px">Seq</th>
+      <th style="width:150px"> Cofirmation No</th>
+      <th style="width:130px">Guest Name</th>
+      <th style="width:110px"> Arrival</th>
+      <th style="width:110px"> Departure</th>
+      <th style="width:140px"> Room Type</th>
+      <th style="width:63px"> Adult</th>
+      <th style="width:60px"> Child</th>
+      <th style="width:90px"> Channels</th>
+      <th>Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let detail of hello |filterdata:{ customer_confirmation_number :conf_num,customer_name:conf_num,customer_room_type:conf_num,
+    customer_adult:conf_num,customer_child:conf_num,channel:conf_num,customer_amount:conf_num } ;let i = index" (click)="selectMembersEdit(detail,i)"
+    [ngClass]="{'backGroundColor':i==selectindex}" (dblclick)="showMoreBut()">
+      <td style="width:50px">{{i+1}}</td>
+      <td style="width:150px">{{detail.customer_confirmation_number}}</td>
+      <td style="width:130px">{{detail.customer_name}}</td>
+      <td style="width:110px">{{detail.customer_arrival_date}} </td>
+      <td style="width:110px">{{detail.customer_depature_date}} </td>
+      <td style="width:140px">{{detail.customer_room_type}} </td>
+      <td style="width:63px">{{detail.customer_adult}} </td>
+      <td style="width:60px">{{detail.customer_child}} </td>
+      <td style="width:90px">{{detail.channel}} </td>
+      <td>{{detail.customer_amount}} </td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+</form>
+     <!-- Alert start-->
+     <div *ngIf="showMore==true">
+        <div class="text-right" style="margin:0px 100px 10px 10px">
+            <button type="button"  data-toggle="tooltip" title="Back" class="btn btn-default" [ngClass]="{disabling:showMore!=false}" (click)="showlessBut()"><span class="fa fa-reply"></span></button>  
+         </div>
+      <div class="panel panel-primary">
+        <div class="panel-body">
+          <div class="row" style="border:1px solid lightgrey;margin:10px ">
+            <div class="col-md-4" style="border-right: 1px solid lightgrey;">
+              <p>Arrival</p>
+              <h6 style="margin-top:-15px;">{{Arrival}}</h6>  
+              <br>        
+              <p>Departure</p>
+              <h6 style="margin-top:-15px;">{{Departure}}</h6>
+              <br>
+              <p>Hotel Name</p>
+              <h6 style="margin-top:-15px;"><b style="color:hotpink">{{hotel}}</b> </h6>
+              <br>
+              <p>Total Adult</p>
+              <h6 style="margin-top:-15px;">{{adults}}</h6>
+              <br>
+              <p>Total Child</p>
+              <h6 style="margin-top:-15px;">{{child}}</h6>
+              <br>
+              <p>Total Price</p>
+              <h6 style="margin-top:-15px;">{{rate}} </h6>
+            </div>
+            <div class="col-md-8">
+              <p>Guest Name:</p>
+              <h6 style="margin-top:-15px;">{{name}} </h6>  
+              <br>    
+              <p>Preferred Language</p>
+              <h6 style="margin-top:-15px;"> {{Language}}</h6>
+              <br>
+              <p>Channel</p>
+              <h6 style="margin-top:-15px;">{{channel}}</h6>
+              <br>
+              <p>Confirmation Number</p>
+              <h6 style="margin-top:-15px;">{{Confirmation}}</h6>
+              <br>
+              <p>Booked On</p>
+              <h6 style="margin-top:-15px;">{{Booked|date}}</h6>
+              <br>
+              <p>No Of Rooms</p>
+              <h6 style="margin-top:-15px;">{{Roomno}} </h6>
+            </div>
+          </div>
+          <div  class=" card" style="border:1px solid lightgrey;margin:10px ">
+            <div class="card-header  bg-light">
+              <h5>{{Roomtype}}</h5>
+              <p><span><i class="fa fa-sign-in" style="margin:10px 10px 10px 0px;"></i>{{Arrival}}</span> <span><i class="fa fa-sign-out" style="margin:10px;"></i>{{Departure}}</span></p>
+            </div>
+            <div class="row" style="padding:20px">
+            <div class="col-md-4">
+                <p>Guest Name</p>
+                <h6 style="margin-top:-15px;">{{name}} </h6>  
+                <br>
+                <p>Max Guest</p>
+                <h6 style="margin-top:-15px;">{{adults+child}}</h6>
+                <br>
+                <p>Room Options</p>
+                <label></label>
+                <img src="../../assets/images/Deluxe Suite.jpg" alt="" width="300px" height="250px">
+                <br>
+              </div>
+              <div class="col-md-8">
+                <br>
+                <br>
+                <br><br><br><br>
+                <br>
+                  <table class="table table-bordered">
+                      <tbody>
+                        <tr>
+                          <th>Date</th>
+                          <th>Rate</th>
+                          <th>Price Per Night in $</th>
+                        </tr>
+                        <tr *ngFor="let item of tabledata">
+                          <td>{{item.rate_date}}</td>
+                          <td></td>
+                          <td>{{item.amount}}</td>
+                        </tr>
+                        <tr>
+                          <td><b>Total</b></td>
+                          <td></td>
+                          <td>{{rate}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </div>
+            </div>
+            <br>
+          </div>
+        
+        </div>
+      </div>
+           
+            <div class="text-center">
+               <button type="button" class="btn btn-danger" [ngClass]="{disabling:showMore!=false}" (click)="showlessBut()"><b>Close</b><span class="glyphicon glyphicon-remove" style="padding-left:5px;"></span></button>  
+            </div>
+      </div> 
+      <!-- Alert End --> 

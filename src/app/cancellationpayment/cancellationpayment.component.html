@@ -1,0 +1,347 @@
+<div class="row">    
+  <div class="col-sm-4">        
+    <h5 style="color: steelblue;">Policies</h5>             
+  </div>
+  </div>
+
+  <div class="col-sm-12">        
+      <label>All your payment, cancellation and policy information is 
+        kept it here -so you can view, edit and manage in one place.</label> 
+    </div>
+<div class="row" style="margin-top: 15px;">  
+    <div class="col-sm-4">        
+      <h5 style="color: steelblue;">Cancellation and Payment Policies </h5>             
+    </div>
+    </div>
+
+<div class="row" style="margin-top: 5px;">   
+    
+    <div class="col-sm-6">
+        <div class="card" (click)="basicdeal();" [ngClass]="{'changeborderclr': basicFlag}"
+        style="height: 96%;">
+            <div class="card-header"><h6 style="color: white">Flexible- 10 days(General)</h6></div>
+            <div class="card-body">
+              
+              <label class="card-text" >
+                 <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                  The guest can cancel free of charge until 30 days before arrival.
+                    </span >
+                    </label>
+                       
+                       <label class="card-text" >
+                          <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            The guest will be charged the total price if they cancel in the 30 day before arrival.  
+                             </span >
+                             </label>
+                             
+                       <br>
+                             <a class="btn btn-primary" data-toggle="modal" data-target="#myModal"
+                             style="margin-top: 30px;color:white;background-color: rgb(51, 122, 183);
+                             border: 1px solid rgb(51, 122, 183);">Change/add details</a> 
+            </div>
+          </div>
+    </div>
+  
+    <div class="col-sm-6">
+        <div class="card" (click)="basicdeal();" [ngClass]="{'changeborderclr': basicFlag}"
+        style="height: 96%;">
+            <div class="card-header"><h6 style="color: white">Non-refundable(Non refundable)</h6></div>
+            <div class="card-body">
+              
+              <label class="card-text" >
+                 <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                 The guest will be charged the total price if they cancel anytime.
+                    </span >
+                    </label>
+                       
+                       <label class="card-text" >
+                          <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            The guest will be charged a prepayment of the total price anytime. 
+                             </span>
+                             </label><br>
+                            <a  class="btn btn-primary" style="margin-top: 13px;color:white;background-color: rgb(51, 122, 183);
+                            border: 1px solid rgb(51, 122, 183) ;">Delete</a>
+            </div>
+          </div>
+    </div>
+  </div>
+
+
+<hr>
+
+    
+<div class="row">
+  <div class="col-sm-4">
+      <h5 style="color: steelblue;">Other Policies</h5>  
+</div>
+</div>
+<div class="row" style="margin-top: 10px;">   
+  <div class="col-sm-6">
+      <div class="card" (click)="basicdeal();" [ngClass]="{'changeborderclr': basicFlag}"
+      style="height: 96%;">
+          <div class="card-header"><h6 style="color: white">Guest information</h6></div>
+          <div class="card-body">
+            <p style="margin-top: -2px;margin-bottom: -1px;font-weight: 500;">Guest Arrival time</p>
+            <label class="card-text" >
+               <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                check in from 12:00 PM to 1:00 PM
+                  </span >
+                  </label><br>
+                <label class="card-text" >
+                     <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                         check out from 9:00 AM to 1:00 AM
+                       </span>
+                     </label>
+                     <p style="margin-top: -2px;margin-bottom: -1px;font-weight: 500;">Guest Address Details</p>
+                     <label class="card-text" >
+                        <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                         Your guests do not have to provide their address details when they book 
+                           </span >
+                           </label>
+                           <p style="margin-top: -2px;margin-bottom: -1px;font-weight: 500;">Guest Phone Number</p>
+                     <label class="card-text" >
+                        <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                         Your guests must provide a phone number when they book 
+                           </span >
+                           </label>      <br>                     
+                           <!-- <a  class="btn btn-primary" style="color: white;">Change/add details</a>                            -->
+          </div>
+        </div>
+  </div>
+
+  <div class="col-sm-6">
+      <div class="card" (click)="basicdeal();" [ngClass]="{'changeborderclr': basicFlag}"
+      style="height: 96%;">
+          <div class="card-header"><h6 style="color: white">Property -Specific</h6></div>
+          <div class="card-body">
+            <p style="margin-top: -2px;margin-bottom: -1px;font-weight: 500;">Internet</p>
+            <label class="card-text" >
+               <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                Wi-Fi is available in the hotel rooms and free of charge. 
+                  </span >
+                  </label>
+                     <p style="margin-top: -2px;margin-bottom: -1px;font-weight: 500;">Parking</p>
+                     <label class="card-text" >
+                        <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                         Free private parking is available on site (reservation is not needed). 
+                           </span >
+                           </label>
+                           <p style="margin-top: -2px;margin-bottom: -1px;font-weight: 500;">Pets</p>
+                     <label class="card-text" >
+                        <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                        Pets are not allowed.
+                           </span >
+                           </label><br>
+                           <!-- <a  class="btn btn-primary" style="margin-top: 30px;color:white;">Change/add details</a>  -->
+          </div>
+        </div>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 5px;">   
+    <div class="col-sm-6">
+        <div class="card" (click)="basicdeal();" [ngClass]="{'changeborderclr': basicFlag}"
+        style="height: 96%;">
+            <div class="card-header"><h6 style="color: white">Guest Payment Options</h6></div>
+            <div class="card-body">
+              <p style="margin-top: -2px;margin-bottom: -1px;">
+                <a class="fa fa-hand-o-right"></a> &nbsp;&nbsp;Credit Card</p>
+              <label class="card-text" style="margin-top: 10px;">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                  <input type="radio" >&nbsp;
+                  <span style="vertical-align: text-bottom;">Yes</span >
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio">&nbsp;
+                    <span style="vertical-align: text-bottom;">No</span >
+                    </label><br>                           
+            </div>
+          </div>
+    </div>
+  
+    <div class="col-sm-6">
+        <div class="card" (click)="basicdeal();" [ngClass]="{'changeborderclr': basicFlag}"
+        style="height: 96%;">
+            <div class="card-header"><h6 style="color: white">Children & Extra Beds</h6></div>
+            <div class="card-body">
+              
+              <label class="card-text" >
+                 <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                  Childern cannot be accommodated at the hotels.
+                    </span >
+                    </label>
+                       
+                       <label class="card-text" >
+                          <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                          Any additional adults are charged INR 499 per extra beds. 
+                             </span >
+                             </label>
+                             
+                       <label class="card-text" >
+                          <span><i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                         The maximum number of extra beds in a room is 1.
+                             </span >
+                             </label><br>
+                             <!-- <a  class="btn btn-primary" style="margin-top: 30px;color:white;">Change/add details</a>  -->
+            </div>
+          </div>
+    </div>
+  </div>
+  
+
+  <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content" style="width: 160%;left: -165px;top: 60px;height: 500px;;">
+        
+          <!-- Modal Header --> 
+           <div class="modal-header" style="background-color: #1a3d5c; color: white;">
+            <h5 class="modal-title">Cancellation Preference</h5>
+            <button type="button" class="close" data-dismiss="modal" 
+            style="color: white;">&times;</button>
+          </div> 
+          
+          <!-- Modal body -->
+          <div class="modal-body" style="height: 30em;overflow: auto;margin-left: 4 0px;">
+            <div >
+            <!-- <div class="row">
+              <div class="col-sm-12">
+                  <h6 class="modal-title">Cancellation Preference</h6>
+              </div>
+            </div> -->
+              <div class="row" style="margin-top: 15px;">   
+                  <div class="col-sm-9">  
+                    <label style="font-weight: 500;">Is there a period when the guest can cancel free of charge?</label>
+                  </div>       
+              </div>
+              <div class="row">   
+                  <div class="col-sm-9">  
+                   <span><input type="radio" id="radio1" name="freecancel" style="vertical-align: -webkit-baseline-middle;" 
+                    [(ngModel)]="cancelDtls.freecancel" value="yes" /> <label for="radio1">Yes</label></span>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <span><input type="radio" id="radio2" name="freecancel"  style="vertical-align: -webkit-baseline-middle;" 
+                    [(ngModel)]="cancelDtls.freecancel" value="no" /><label for="radio2">No</label></span>
+                  </div>       
+              </div>
+              <hr>
+
+              <div class="row">   
+                  <div class="col-sm-12">  
+                    <h6>Specify  Conditions</h6>
+                  </div>       
+              </div>
+              <div class="row" style="margin-top: 15px;">   
+                  <div class="col-sm-9">  
+                    <label style="font-weight: 500;">How long before arrival can the guest cancel free  of charge?</label>
+                  </div>       
+              </div>
+              <div class="row">   
+                  <div class="col-sm-9">  
+                  <select style="width: 76%;height: 34px;border: 1px solid #7f7f7f;" 
+                  [(ngModel)]="cancelDtls.freechargeDay">
+                    <option value="5">Until 5 day before arrival</option>
+                    <option value="10">Until 10 day before arrival</option>
+                    <option value="15">Until 15 day before arrival</option>
+                    <option value="20">Until 20 day before arrival</option>
+                    <option value="25">Until 25 day before arrival</option>
+                    <option value="30">Until 30 day before arrival</option>
+                  </select>
+                  </div>       
+              </div>
+
+              <div class="row" style="margin-top: 15px;">   
+                  <div class="col-sm-7">  
+                    <label style="font-weight: 500;">How much is the guest charged for cancellation in the 30 days before arrival?</label>
+                  </div>       
+              </div>
+              <div class="row">   
+                  <div class="col-sm-9">  
+                    <select style="width: 76%;height: 34px;border: 1px solid #7f7f7f;" 
+                    [(ngModel)]="cancelDtls.freechargeCost">
+                      <option value="100">100% of the total charge</option>
+                      <option value="70">70% of the total charge</option>
+                      <option value="50">50% of the total charge</option>
+                      <option value="30">30% of the total charge</option>
+                      <option value="20">20% of the total charge</option>
+                      <option value="10">10% of the total charge</option>
+                    </select>
+                  </div>       
+              </div>
+
+              <div class="row" style="margin-top: 15px;">   
+                  <div class="col-sm-7">  
+                    <label style="font-weight: 500;">How much is the guest charged for cancellation a no-show?</label>
+                  </div>       
+              </div>
+              <div class="row">   
+                  <div class="col-sm-9">  
+                    <select style="width: 76%;height: 34px;border: 1px solid #7f7f7f;" 
+                    [(ngModel)]="cancelDtls.freecargeNoShow">
+                      <option value="100">100% of the total charge</option>
+                      <option value="same as the cancellation fee">Same as the cancellation fee</option>                      
+                    </select>
+                  </div>       
+              </div>
+<!--               
+
+              <div class="row" style="margin-top: 15px;">   
+                  <div class="col-sm-12" style="background-color: #d0cfcf;">  
+                    <h6 style="margin-top: 10px;">Policy Summary </h6>
+                     <p>The guest can cancel free of charge until 30 days before arraival. The guest will be charged the total price of if they cancel in the 30 days before arrival</p>
+                  </div>       
+              </div> -->
+                
+              <div class="row" style="margin-top: 5px;">
+                  <div class="col-sm-9">
+                      <h6 class="modal-title">Additional Requirements</h6>
+                  </div>
+                </div>
+                  <div class="row" style="margin-top: 10px;">   
+                      <div class="col-sm-9">  
+                        <label style="font-weight: 500;">Do you require prepayment?</label>
+                      </div>       
+                  </div>
+                  <div class="row">   
+                      <div class="col-sm-9">  
+                       <span><input type="radio" id="radio3" name="freePayment"  style="vertical-align: -webkit-baseline-middle;" 
+                        [(ngModel)]="cancelDtls.freePayment" value="yes" /><label for="radio3">Yes</label></span>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <span><input type="radio" id="radio4" name="freePayment" style="vertical-align: -webkit-baseline-middle;" 
+                        [(ngModel)]="cancelDtls.freePayment"  value="no" /><label for="radio4">No</label></span>
+                      </div>       
+                  </div>
+
+                  <div class="row" style="margin-top: 10px;">   
+                      <div class="col-sm-9">  
+                        <label style="font-weight: 500;">When do you want to charge the payment?</label>
+                      </div>       
+                  </div>
+                  <div class="row">   
+                      <div class="col-sm-9">  
+                       <span><input type="radio"  id="radio5" name="freePaymntchargeDesc" style="vertical-align: -webkit-baseline-middle;" 
+                        [(ngModel)]="cancelDtls.freePaymntchargeDesc" value="After the reservation is made" />
+                        <label for="radio5">After the reservation is made</label></span>
+                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                       <span><input type="radio" id="radio6" name="freePaymntchargeDesc" style="vertical-align: -webkit-baseline-middle;" 
+                        [(ngModel)]="cancelDtls.freePaymntchargeDesc" value="After the cancellation fee begins" />
+                        <label for="radio6">After the cancellation fee begins</label></span>
+                      </div>       
+                  </div>
+<!-- 
+                  <div class="row" style="margin-top: 15px;">   
+                      <div class="col-sm-12"  style="background-color: #d0cfcf;">  
+                        <h6 style="margin-top: 10px;">Prepayment Summary </h6>
+                        <p>The guest will be charged a prepayment of 50% of the total price after reservations. You can collect this prepayment from the guest anytime. </p>
+                      </div>       
+                  </div> -->
+
+</div>
+          </div>
+          
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn "  data-dismiss="modal" (click)="saveCancellationDetails(cancelDtls)">Save</button>
+            <button type="button" class="btn " data-dismiss="modal">Cancel</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
