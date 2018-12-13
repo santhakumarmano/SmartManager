@@ -4,7 +4,7 @@
     </div>
     </div> 
     <ul class="nav nav-tabs">
-            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Grid" >Grid</a></li>
+            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Grid" (click)="getperioddays(fromdate,todate3)">Grid</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Daterange" (click)="refreshroomtype()">Setup Rate and Availability</a></li>
             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Restriction">Restriction</a></li>
     </ul>
@@ -76,7 +76,7 @@
 
                     <thead>
                             <tr class="tabborder">
-                            <th class="tabborder text-center" style="    line-height: 15px;width:400px">Date</th>
+                            <th class="tabborder text-center" style="    line-height: 15px;width:175px">Date</th>
                             <ng-container *ngFor="let grdate of griddate">
                                 <td style="font-weight:700;    line-height: 15px;"  class="tabborder">{{grdate|date:'MMM'}}<br>{{grdate|date:'dd'}}<br>{{grdate|date:'EEE'}}</td>
                                 <!-- <td style="font-weight:700" class="tabborder"> {{grd.room_date | date:'MMM'}} <br>{{grd.room_date | date:'dd'}} <br> {{grd.room_date | date:'EEE'}} </td> -->
@@ -89,7 +89,7 @@
                 
                 </tr> 
                     <tr class="rows">
-                    <th class="tabborder" data-toggle="modal"  style="    line-height: 15px;width:400px">Room To Sell</th>
+                    <th class="tabborder" data-toggle="modal"  style="    line-height: 15px;width:175px">Room To Sell</th>
                         <td *ngFor="let var_avail of item.room_to_sell;let i=index" (change)="editrmsell(i,var_avail)" style="    line-height: 15px;">
                                 <input type="text" maxlength="3" pattern="([0-9]|[0-9]|[0-9]{3})" style="padding:3px; width:30px;" [(ngModel)]="var_avail.available_count" >                                
                         </td>
@@ -97,7 +97,7 @@
                     </tr>
                     <tr class="rows sortable"  *ngFor="let rmplans of item.plans">
                         
-                            <th class="tabborder" style="    line-height: 15px;width:400px" (click)="planclick(j,data1)" data-toggle="modal"  data-target="#myModal1" *ngFor="let data1 of rmplans| unique:'rate_plan' let j=index " >{{data1.rate_plan|titlecase}}</th>
+                            <th class="tabborder" style="    line-height: 15px;width:175px" (click)="planclick(j,data1)" data-toggle="modal"  data-target="#myModal1" *ngFor="let data1 of rmplans| unique:'rate_plan' let j=index " >{{data1.rate_plan|titlecase}}</th>
                             <!-- <td class="tabborder" data-toggle="modal" data-target="#myModal1" *ngFor="let rmplan of item.plan_name"  (click)="planclick(j,list)">{{rmplan.name}}</td> -->
                             
                             <td *ngFor="let data of rmplans let j=index" (dblclick)="editfun(j,data)" [ngClass]="{'backgroundcolorgreenchange': data.room_open== '1', 'backgroundcoloryellowchange': data.room_open== 'NA','backgroundcolorredchange': data.room_open== '0'}" style="    line-height: 15px;" ></td>

@@ -190,11 +190,11 @@ public total_plans=[];
           }
           else{
             //console.log("else")
-            this.gridget[i]['room_type'+j]['room_to_sell'][k] = { business_id: "8991897773", room_date: this.griddate[k] , available_count: null}
+            this.gridget[i]['room_type'+j]['room_to_sell'][k] = { business_id: this.bs_id, room_date: this.griddate[k] , available_count: null}
           }
         }
         catch(e){
-          this.gridget[i]['room_type'+j]['room_to_sell'][k] = { business_id: "8991897773", room_date: this.griddate[k] , available_count: null}
+          this.gridget[i]['room_type'+j]['room_to_sell'][k] = { business_id: this.bs_id, room_date: this.griddate[k] , available_count: null}
           
         }
        }
@@ -585,11 +585,11 @@ this.parms = {
           }
           else{
             //console.log("else")
-            this.gridget[i]['room_type'+j]['room_to_sell'][k] = { business_id: "8991897773", room_date: this.griddate[k] , available_count: null}
+            this.gridget[i]['room_type'+j]['room_to_sell'][k] = { business_id: this.bs_id, room_date: this.griddate[k] , available_count: null}
           }
         }
         catch(e){
-          this.gridget[i]['room_type'+j]['room_to_sell'][k] = { business_id: "8991897773", room_date: this.griddate[k] , available_count: null}
+          this.gridget[i]['room_type'+j]['room_to_sell'][k] = { business_id: this.bs_id , room_date: this.griddate[k] , available_count: null}
           
         }
        }
