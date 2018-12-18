@@ -41,6 +41,9 @@ input[type=radio]{
     font-size: 10px;
 }
 
-.card{
-  max-height: 350px;
+.card-body{
+  min-height:210px;
+}
+.card-footer{
+  min-height: 240px;
 }

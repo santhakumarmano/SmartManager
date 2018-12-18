@@ -43,10 +43,10 @@
 <div class="row" *ngIf="showMore!=true" >
   <div class="col-md-3"  *ngFor="let room of roomdetails " style="margin-bottom:5px;">
     <div class="card" (click)="viewdata(room)">
-        <img class="card-img-top hovercss" alt="Card image"
-        [src]="room.upload_photos"
-       style="width: 100px;margin-left: 62px; margin-top: 20px;height: 100px;border-radius: 50%;">
       <div class="card-body">
+          <img class="card-img-top hovercss" alt="Card image"
+          [src]="room.upload_photos"
+         style="width: 100px;margin-left: 42px; margin-top: 20px;height: 100px;border-radius: 50%;">
           <h6 style="text-align: center;">{{room.room_name|titlecase}}</h6>
           <!-- <p class="card-text" style="text-align: center;margin-top: -12px;">Price :&nbsp;{{roomdetails.standard_rate}}</p> -->
 
@@ -72,11 +72,10 @@
   <br>
   <br>
     <div class="col-md-3" (click)="Queryselectoptions()">
-    <div class="card"  data-toggle="modal" data-target="#roomplan">
-        <i class="fa fa-plus fa-7x text-center"
-       style="margin-left: 62px;font-size:100px;margin-top: 20px;height: 100px;width: 100px;"></i>
-
+    <div class="card"  data-toggle="modal" data-target="#roomplan">      
       <div class="card-body">
+          <i class="fa fa-plus fa-7x text-center"
+          style="margin-left: 62px;font-size:100px;margin-top: 20px;height: 100px;width: 100px;"></i>
         <h6 style="text-align:center">Room Name</h6>
       </div>
       <div class="card-footer">
